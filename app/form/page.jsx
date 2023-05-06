@@ -55,7 +55,7 @@ const Form = () => {
 
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Ttd. Pemberi Izin</span>
+              <span className="label-text">Paraf Pemberi Izin</span>
             </label>
             <SignatureCanvas
               penColor="black"
@@ -67,7 +67,7 @@ const Form = () => {
 
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Ttd. Pendamping</span>
+              <span className="label-text">Paraf Pendamping</span>
             </label>
             <SignatureCanvas
               penColor="black"

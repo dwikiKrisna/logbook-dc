@@ -7,12 +7,12 @@ export default function Home() {
       <div className="flex flex-col flex-1 justify-center items-center">
         <div>
           <h1 className=" text-3xl font-bold  mb-2 ">
-            <mark class="px-2 text-white bg-blue-600 rounded dark:bg-blue-500">
+            <mark className="px-2 text-white bg-blue-600 rounded dark:bg-blue-500">
               Catatan Akses Masuk
             </mark>
           </h1>
           <h1 className="text-4xl font-bold mb-5">
-            <mark class="px-2 text-white bg-blue-600 rounded dark:bg-blue-500">
+            <mark className="px-2 text-white bg-blue-600 rounded dark:bg-blue-500">
               Ruang Server (Data Center)
             </mark>
           </h1>

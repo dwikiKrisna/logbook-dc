@@ -7,12 +7,13 @@ import React from "react";
 import SignaturePad from "react-signature-canvas";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import axios from 'axios'
 
 //form validation schema  with yup
 const formSchema = yup.object().shape({
+  jenisServer: yup.string().required(),
   nama: yup.string().required(),
   institusi: yup.string().required(),
-  jenisIdentitas: yup.string().required(),
   nomorIdentitas: yup.string().required(),
   keperluan: yup.string().required(),
   tanggal: yup.string().required(),
@@ -34,6 +35,9 @@ const formSchema = yup.object().shape({
 
 const Form = () => {
   let sigCanvas = useRef({});
+  let sigCanvasPemberiIzin = useRef({});
+  let sigCanvasPendamping = useRef({});
+
 
 
 
@@ -49,7 +53,18 @@ const Form = () => {
   });
 
   const onSubmit = (values) => {
+
     console.log({ ...values });
+
+    axios.post('/api/logbook', {
+      ...values
+    })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   //signature canvas
@@ -59,6 +74,22 @@ const Form = () => {
       return dataURL;
     }
   };
+
+
+  const formatIntoPngPemberiIzin = () => {
+    if (sigCanvas.current) {
+      const dataURL = sigCanvas.current.toDataURL();
+      return dataURL;
+    }
+  };
+
+  const formatIntoPngPendamping = () => {
+    if (sigCanvas.current) {
+      const dataURL = sigCanvas.current.toDataURL();
+      return dataURL;
+    }
+  };
+
 
   //text input component
   const TextInput = ({ name, label, type, placeholder }) => {
@@ -81,8 +112,8 @@ const Form = () => {
 
 
   return (
-    <body>
-      <div className="container  bg-white shadow-xl max-w-screen-md mx-auto my-5 p-5 bg-slate-50">
+    <>
+      <div className="container shadow-xl max-w-screen-md mx-auto my-5 p-5 bg-slate-50">
         <Link href="/">
           <button className="btn btn-md mb-5">Kembali</button>
         </Link>
@@ -91,15 +122,23 @@ const Form = () => {
         </h1>
         <form >
           <div className="flex flex-wrap gap-3">
+
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Jenis Ruang Server</span>
+              </label>
+              <select className="select select-bordered" {...register('jenisServer')} defaultValue="DC" >
+                <option value='DC'>DC</option>
+                <option value="DRC">DRC</option>
+              </select>
+              <p className="text-red-500 text-xs italic">{errors.jenisServer?.message}</p>
+
+            </div>
+
             <TextInput name='nama' label="Nama" type="text" placeholder="Nama" />
             <TextInput name='institusi' label="Institusi" type="text" placeholder="Institusi" />
-            <TextInput
-              name='jenisIdentitas'
-              label="Jenis Identitas"
-              type="text"
-              placeholder="NIK/NIP"
 
-            />
             <TextInput name='nomorIdentitas' label="Nomor Identitas" type="text" placeholder="" />
             <div className="form-control w-full max-w-xs ">
               <label className="label">
@@ -127,7 +166,7 @@ const Form = () => {
                 render={({ field }) => (
                   <SignaturePad
                     ref={sigCanvas}
-                    onEnd={() => field.onChange(formatIntoPng())}
+                    onEnd={() => field.onChange(formatIntoPngPemberiIzin())}
                     penColor="black"
                     canvasProps={{ className: "w-full h-32 border rounded-lg bg-white" }}
                   />
@@ -150,7 +189,7 @@ const Form = () => {
                 render={({ field }) => (
                   <SignaturePad
                     ref={sigCanvas}
-                    onEnd={() => field.onChange(formatIntoPng())}
+                    onEnd={() => field.onChange(formatIntoPngPendamping())}
                     penColor="black"
                     canvasProps={{ className: "w-full h-32 border rounded-lg bg-white" }}
                   />
@@ -165,7 +204,7 @@ const Form = () => {
           <button className="btn btn-md mt-3" onClick={handleSubmit(onSubmit)} >Submit</button>
         </form>
       </div>
-    </body>
+    </>
   );
 };
 

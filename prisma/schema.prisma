@@ -13,9 +13,9 @@ datasource db {
 
 model Logbook {
   id         Int        @id @default(autoincrement())
+  janisServer String @db.VarChar(255)
   nama      String    @db.VarChar(255)
   institusi String    @db.VarChar(255)
-  jenisIdentitas String @db.VarChar(255)
   noIdentitas String @db.VarChar(255)
   keperluan String @db.VarChar(1000)
   waktuMasuk DateTime @db.DateTime

@@ -18,8 +18,8 @@ model Logbook {
   institusi String    @db.VarChar(255)
   noIdentitas String @db.VarChar(255)
   keperluan String @db.VarChar(1000)
-  waktuMasuk DateTime @db.DateTime
-  waktuKeluar DateTime @db.DateTime
+  waktuMasuk DateTime 
+  waktuKeluar DateTime 
   namaPemberiIzin String @db.VarChar(255)
   parafPemberiIzin String @db.Text
   namaPendamping String @db.VarChar(255)

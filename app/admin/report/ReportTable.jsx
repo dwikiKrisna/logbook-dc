@@ -1,21 +1,139 @@
-import React from 'react'
+import React from "react";
+import useSWR from "swr";
+import axios from "axios";
+import { getDate, getTime } from "@/utils/timeFormat";
+import Image from "next/image";
 
-const getLogbooks = async () => {
-    const res = await fetch("http://localhost:3000/api/logbook", {
-        next: { revalidate: 0 },
-    });
-    return res.json();
-};
+const fetcher = (url) => axios.get(url).then((res) => res.data);
 
-const ReportTable = async () => {
-    const logbookData = await getLogbooks();
+const ReportTable = React.forwardRef(({ formValue }, ref) => {
+  const { data, error, isLoading } = useSWR(
+    `/api/report?startdate=${formValue.tanggalStart}&enddate=${formValue.tanggalEnd}&jenisServer=${formValue.jenisServer}`,
+    fetcher
+  );
 
-    const [logbooks] = await Promise.all([logbookData]);
-    console.log(logbookData)
+  if (error) return <div>failed to load</div>;
+  if (isLoading) return <div>loading...</div>;
 
-    return (
-        <div>ReportTable</div>
-    )
-}
+  return (
+    <div ref={ref} className="bg-white p-10 relative">
+      <div className="absolute right-10 top-10 border-2 py-2 px-5">
+        <p className="text center">Klasifikasi Informasi</p>
+        <p className=" text-center font-bold text-green-600">TERBUKA</p>
+      </div>
+      <h1 className="text-2xl font-bold text-center">Catatan (Logbook)</h1>
+      <h1 className="text-2xl font-bold text-center">
+        Akses Masuk Ruang Server (
+        {formValue.jenisServer === "DC"
+          ? "Data Center"
+          : "Data Recovery Center"}
+        )
+      </h1>
+      <p className="text-center  mb-5 text-slate-700">
+        Tanggal {formValue.tanggalStart} s.d. {formValue.tanggalEnd}
+      </p>
+      <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th
+              scope="col"
+              className="px-6 py-3 text-center border border-slate-300 "
+            >
+              No
+            </th>
+            <th
+              scope="col"
+              className="px-6 py-3 text-center border border-slate-300"
+            >
+              Tanggal
+            </th>
+            <th
+              scope="col"
+              className="px-6 py-3 text-center border border-slate-300"
+            >
+              Nama <br /> Institusi <br /> No.KTP/SIM/ID
+            </th>
+            <th
+              scope="col"
+              className="px-6 py-3 text-center border border-slate-300"
+            >
+              Keperluan
+            </th>
+            <th
+              scope="col"
+              className="px-6 py-3 text-center border border-slate-300"
+            >
+              Jam Keluar <br />
+              Jam Masuk
+            </th>
+            <th
+              scope="col"
+              className="px-6 py-3 text-center border border-slate-300"
+            >
+              Pemberi Izin
+            </th>
+            <th
+              scope="col"
+              className="px-6 py-3 text-center border border-slate-300"
+            >
+              Pendamping
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((logbook, index) => {
+            return (
+              <tr
+                key={index}
+                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+              >
+                <td className="px-6 py-4 border border-slate-300">
+                  {index + 1}
+                </td>
+                <td className="px-6 py-4 border border-slate-300">
+                  {getDate(logbook.waktuMasuk)}
+                </td>
+                <td className="px-6 py-4 border border-slate-300 text-center">
+                  {logbook.nama} <div className="divider"></div>{" "}
+                  {logbook.institusi} <div className="divider"></div>
+                  {logbook.noIdentitas}
+                </td>
+                <td className="px-6 py-4 border border-slate-300">
+                  <div>
+                    <p>{logbook.keperluan}</p>
+                  </div>
+                </td>
+                <td className="px-6 py-4 border border-slate-300">
+                  {" "}
+                  {getTime(logbook.waktuMasuk)} s.d.{" "}
+                  {getTime(logbook.waktuKeluar)}
+                </td>
+                <td className="px-6 py-4 border border-slate-300 text-center">
+                  {logbook.namaPemberiIzin}
+                  <div className="divider"></div>
+                  <Image
+                    src={logbook.parafPemberiIzin}
+                    width={100}
+                    height={100}
+                    alt="paraf pemberi izin"
+                  />
+                </td>
+                <td className="px-6 py-4 border border-slate-300 text-center">
+                  {logbook.namaPendamping} <div className="divider"></div>
+                  <Image
+                    src={logbook.parafPendamping}
+                    width={100}
+                    height={100}
+                    alt="paraf pendamping"
+                  />
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+});
 
-export default ReportTable
+export default ReportTable;

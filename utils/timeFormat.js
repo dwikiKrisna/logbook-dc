@@ -6,13 +6,15 @@ const getDate = (IsoFormatDate) => {
     return localDate;
 }
 
+
 const getTime = (IsoFormatDate) => {
     const utcDate = new Date(IsoFormatDate);
-    const hours = utcDate.getHours();
-    const minutes = utcDate.getMinutes();
-    const formattedTime = hours + ':' + minutes;
+    const options = { hour: 'numeric', minute: 'numeric' };
+    const localTime = utcDate.toLocaleTimeString('id-ID', options);
+    const formattedTime = localTime.replace('.', ':');
 
-    return formattedTime;
+
+    return formattedTime; //expected return "hh:mm"
 }
 
 // input : "2023-05-10" and "16:27" output IsoFormatDateUTC : "2023-05-10T09:27:00.000Z"

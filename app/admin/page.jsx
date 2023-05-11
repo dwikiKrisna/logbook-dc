@@ -8,30 +8,33 @@ import { getDate, getTime } from "../../utils/timeFormat";
 
 const fetcher = (url) => axios.get(url).then((res) => res.data);
 
-// const getLogbooks = async () => {
-//   const res = await fetch(process.env.BASE_URL + "/api/logbook", {
-//     cache: "no-store",
-//   });
-//   return res.json();
-// };
-
-const Admin = async () => {
-  // const logbookData = await getLogbooks();
-  // const [logbooks] = await Promise.all([logbookData]);
-
+const Admin = () => {
   const { data, error, isLoading } = useSWR(`/api/logbook`, fetcher);
 
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
 
+  const handleDelete = async (id) => {
+    console.log(id);
+    try {
+      const res = await axios.delete(`/api/logbook?id=${id}`, {
+        id: id,
+      });
+      console.log(res);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div className="container max-w-screen-2xl mx-auto my-5 p-5">
-        <h1 className="text-2xl font-bold mb-5">Admin Dashboard</h1>
+        <h1 className="text-2xl font-bold mb-10">Admin Dashboard</h1>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <table className="w-full text-sm text-left text-gray-500 ">
+            <thead className="text-xs text-gray-700 uppercase bg-blue-50 ">
               <tr>
                 <th
                   scope="col"
@@ -80,12 +83,18 @@ const Admin = async () => {
                   scope="col"
                   className="px-6 py-3 text-center border border-slate-300"
                 >
+                  Jenis Ruang Server
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-center border border-slate-300"
+                >
                   Aksi
                 </th>
               </tr>
             </thead>
-            <tbody>
-              {data.logbooks.map((logbook, index) => {
+            <tbody className="text-black">
+              {data.map((logbook, index) => {
                 return (
                   <tr
                     key={index}
@@ -98,41 +107,58 @@ const Admin = async () => {
                       {getDate(logbook.waktuMasuk)}
                     </td>
                     <td className="px-6 py-4 border border-slate-300 text-center">
-                      {logbook.nama} <div className="divider"></div>{" "}
-                      {logbook.institusi} <div className="divider"></div>
-                      {logbook.noIdentitas}
+                      <div class="grid grid-cols-1 divide-y">
+                        <div>{logbook.nama} </div>
+                        <div>{logbook.institusi}</div>
+                        <div>{logbook.noIdentitas}</div>
+                      </div>
                     </td>
                     <td className="px-6 py-4 border border-slate-300">
                       <div>
                         <p>{logbook.keperluan}</p>
                       </div>
                     </td>
-                    <td className="px-6 py-4 border border-slate-300">
+                    <td className="px-6 py-4 border border-slate-300 text-center ">
                       {" "}
                       {getTime(logbook.waktuMasuk)} s.d.{" "}
                       {getTime(logbook.waktuKeluar)}
                     </td>
                     <td className="px-6 py-4 border border-slate-300 text-center">
-                      {logbook.namaPemberiIzin}
-                      <div className="divider"></div>
-                      <Image
-                        src={logbook.parafPemberiIzin}
-                        width={100}
-                        height={100}
-                        alt="paraf pemberi izin"
-                      />
+                      <div class="grid grid-cols-1 divide-y">
+                        {logbook.namaPemberiIzin}
+                        <Image
+                          src={logbook.parafPemberiIzin}
+                          width={100}
+                          height={100}
+                          alt="paraf pemberi izin"
+                        />
+                      </div>
                     </td>
                     <td className="px-6 py-4 border border-slate-300 text-center">
-                      {logbook.namaPendamping} <div className="divider"></div>
-                      <Image
-                        src={logbook.parafPendamping}
-                        width={100}
-                        height={100}
-                        alt="paraf pendamping"
-                      />
+                      <div class="grid grid-cols-1 divide-y">
+                        {logbook.namaPendamping}
+                        <Image
+                          src={logbook.parafPendamping}
+                          width={100}
+                          height={100}
+                          alt="paraf pendamping"
+                        />
+                      </div>
                     </td>
+
                     <td className="px-6 py-4 border border-slate-300">
-                      <button className="btn btn-xs btn-error">delete</button>
+                      {logbook.janisServer}
+                    </td>
+
+                    <td className="px-6 py-4 border border-slate-300">
+                      <button
+                        className="btn btn-xs btn-error"
+                        onClick={() => {
+                          handleDelete(logbook.id);
+                        }}
+                      >
+                        delete
+                      </button>
                     </td>
                   </tr>
                 );

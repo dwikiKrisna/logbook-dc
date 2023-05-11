@@ -7,3 +7,26 @@
     text-transform: none;
   }
 }
+
+@media print {
+  html,
+  body {
+    height: initial !important;
+    overflow: initial !important;
+    print-color-adjust: exact;
+  }
+}
+
+@media print {
+  .pagebreak {
+    margin-top: 1rem;
+    display: block;
+    page-break-before: always;
+  }
+}
+
+@page {
+  size: auto;
+  margin-top: 20mm;
+  margin-bottom: 20mm;
+}

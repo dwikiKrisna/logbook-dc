@@ -10,6 +10,7 @@ import * as yup from "yup";
 import axios from 'axios'
 import { getDate, getTime } from "@/utils/timeFormat";
 import Image from "next/image";
+import Success from "./Success";
 
 //form validation schema  with yup
 const formSchema = yup.object().shape({
@@ -54,7 +55,6 @@ const Form = () => {
 
   // api call to backend with axios 
   const onSubmit = async (values) => {
-    console.log({ ...values });
     try {
       setLoading(true);
       const res = await axios.post('/api/logbook', {
@@ -136,36 +136,12 @@ const Form = () => {
     )
   }
 
-  console.log("result", result)
+  // console.log("result", result)
 
   if (success) {
     return (
-      <div className="container shadow-xl max-w-screen-md mx-auto my-5 p-5 bg-slate-100">
-        <div className="flex flex-col items-center">
-          <h1 className="text-2xl font-bold mb-5 text-green-600">
-            Berhasil Input Logbook!
-          </h1>
-          <div className="flex flex-col gap-2">
-            <p className="text-md">Nama: {result.nama}</p>
-            <p className="text-md">Institusi: {result.institusi}</p>
-            <p className="text-md">Nomor Identitas: {result.noIdentitas}</p>
-            <p className="text-md">Keperluan: {result.keperluan}</p>
-            <p className="text-md">Tanggal: {getDate(result.waktuMasuk)}</p>
-            <p className="text-md">Waktu Masuk: {getTime(result.waktuMasuk)}</p>
-            <p className="text-md">Waktu Keluar: {getTime(result.waktuKeluar)}</p>
-            <p className="text-md">Nama Pemberi Izin: {result.namaPemberiIzin}</p>
-            <Image alt='paraf pemberi izin' className="bg-white rounded-lg" src={result.parafPemberiIzin} width={200} height={200} />
-            <p className="text-md mb-5 ">Nama Pendamping: {result.namaPendamping}</p>
-            <Image alt='paraf pedamping' className="bg-white mb-5 rounded-lg" src={result.parafPendamping} width={200} height={200} />
 
-            <div>
-              <button className="btn btn-md mr-5" onClick={() => window.print()}>Print</button>
-              <button className="btn btn-md" onClick={() => window.location.reload()}>Isi Kembali</button>
-            </div>
-
-          </div>
-        </div>
-      </div>
+      <Success result={result} />
     )
 
 
@@ -177,9 +153,9 @@ const Form = () => {
       {loading && <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 flex justify-center items-center">
         <progress className="progress w-56"></progress>
       </div>}
-      <div className="container shadow-xl max-w-screen-md mx-auto my-5 p-5 bg-slate-50">
+      <div className="container shadow-xl max-w-screen-md mx-auto my-5 p-5 bg-blue-50 rounded-xl">
         <Link href="/">
-          <button className="btn btn-md mb-5">Kembali</button>
+          <button className="btn btn-md mb-5 ">Kembali</button>
         </Link>
         <h1 className="text-2xl font-bold mb-5">
           Form Logbook Masuk ke Ruang Server
@@ -223,7 +199,7 @@ const Form = () => {
             <SignatureBox name="parafPendamping" label="Paraf Pendamping" control={control} />
 
           </div>
-          <button className="btn btn-md mt-3" disabled={loading} onClick={handleSubmit(onSubmit)} >{loading ? "Loading..." : "Submit"}</button>
+          <button className="btn btn-md mt-3 btn-primary" disabled={loading} onClick={handleSubmit(onSubmit)} >{loading ? "Loading..." : "Submit"}</button>
         </form>
       </div>
     </>

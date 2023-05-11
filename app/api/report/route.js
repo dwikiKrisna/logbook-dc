@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
 import { getIsoFormatDateUTC } from "@/utils/timeFormat";
+import { db } from "@/utils/db.server";
 
-const prisma = new PrismaClient();
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
@@ -10,7 +9,7 @@ export async function GET(request) {
   const enddate = searchParams.get("enddate");
   const jenisServer = searchParams.get("jenisServer");
 
-  const res = await prisma.logbook.findMany({
+  const res = await db.logbook.findMany({
     where: {
       janisServer: jenisServer,
       waktuMasuk: {

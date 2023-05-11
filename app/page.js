@@ -23,7 +23,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="bg-green-400 flex flex-col p-5 justify-between">
+      <div className="bg-green-600 flex flex-col p-5 justify-between">
         <div>
           <div className="mb-5 bg-white p-5 border-2 border-black">
             <p className="font-bold text-center">Klasifikasi Informasi</p>
@@ -39,8 +39,8 @@ export default function Home() {
         </div>
 
         <div>
-          <p className="text-xl font-bold mb-5">Pusat Teknologi Informasi </p>
-          <p className="text-xl font-bold">PPATK</p>
+          <p className="text-xl font-bold text-white text-center">Pusat Teknologi Informasi </p>
+          <p className="text-xl font-bold text-white text-center">PPATK</p>
         </div>
       </div>
     </main>

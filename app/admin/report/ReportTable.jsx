@@ -3,6 +3,7 @@ import useSWR from "swr";
 import axios from "axios";
 import { getDate, getTime } from "@/utils/timeFormat";
 import Image from "next/image";
+import Report from "./page";
 
 const fetcher = (url) => axios.get(url).then((res) => res.data);
 
@@ -30,10 +31,11 @@ const ReportTable = React.forwardRef(({ formValue }, ref) => {
         )
       </h1>
       <p className="text-center  mb-5 text-slate-700">
-        Tanggal {formValue.tanggalStart} s.d. {formValue.tanggalEnd}
+        {formValue.tanggalStart === formValue.tanggalEnd ? <> Tanggal {formValue.tanggalStart}  </> : <> Tanggal {formValue.tanggalStart} s.d. {formValue.tanggalEnd}</>}
+
       </p>
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <thead className="text-xs text-gray-700 uppercase bg-blue-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th
               scope="col"
@@ -80,7 +82,7 @@ const ReportTable = React.forwardRef(({ formValue }, ref) => {
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="text-black">
           {data.map((logbook, index) => {
             return (
               <tr
@@ -94,9 +96,11 @@ const ReportTable = React.forwardRef(({ formValue }, ref) => {
                   {getDate(logbook.waktuMasuk)}
                 </td>
                 <td className="px-6 py-4 border border-slate-300 text-center">
-                  {logbook.nama} <div className="divider"></div>{" "}
-                  {logbook.institusi} <div className="divider"></div>
-                  {logbook.noIdentitas}
+                  <div class="grid grid-cols-1 divide-y">
+                    <div>{logbook.nama} </div>
+                    <div>{logbook.institusi}</div>
+                    <div>{logbook.noIdentitas}</div>
+                  </div>
                 </td>
                 <td className="px-6 py-4 border border-slate-300">
                   <div>
@@ -109,23 +113,26 @@ const ReportTable = React.forwardRef(({ formValue }, ref) => {
                   {getTime(logbook.waktuKeluar)}
                 </td>
                 <td className="px-6 py-4 border border-slate-300 text-center">
-                  {logbook.namaPemberiIzin}
-                  <div className="divider"></div>
-                  <Image
-                    src={logbook.parafPemberiIzin}
-                    width={100}
-                    height={100}
-                    alt="paraf pemberi izin"
-                  />
+                  <div class="grid grid-cols-1 divide-y">
+                    {logbook.namaPemberiIzin}
+                    <Image
+                      src={logbook.parafPemberiIzin}
+                      width={100}
+                      height={100}
+                      alt="paraf pemberi izin"
+                    />
+                  </div>
                 </td>
                 <td className="px-6 py-4 border border-slate-300 text-center">
-                  {logbook.namaPendamping} <div className="divider"></div>
-                  <Image
-                    src={logbook.parafPendamping}
-                    width={100}
-                    height={100}
-                    alt="paraf pendamping"
-                  />
+                  <div class="grid grid-cols-1 divide-y">
+                    {logbook.namaPendamping}
+                    <Image
+                      src={logbook.parafPendamping}
+                      width={100}
+                      height={100}
+                      alt="paraf pendamping"
+                    />
+                  </div>
                 </td>
               </tr>
             );
@@ -135,5 +142,7 @@ const ReportTable = React.forwardRef(({ formValue }, ref) => {
     </div>
   );
 });
+
+ReportTable.displayName = "ReportTable";
 
 export default ReportTable;

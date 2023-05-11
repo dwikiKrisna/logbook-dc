@@ -1,18 +1,21 @@
+import { db } from "@/utils/db.server";
 import { getIsoFormatDateUTC } from "@/utils/timeFormat";
-import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 
-const prisma = new PrismaClient();
 
 export async function GET(request) {
-  const logbooks = await prisma.logbook.findMany({});
-  return NextResponse.json({ logbooks });
+  const logbooks = await db.logbook.findMany({
+    orderBy: {
+      id: "desc",
+    },
+  });
+  return NextResponse.json(logbooks);
 }
 
 export async function POST(request) {
   const body = await request.json();
 
-  const res = await prisma.logbook.create({
+  const res = await db.logbook.create({
     data: {
       janisServer: body.jenisServer,
       nama: body.nama,
@@ -25,9 +28,23 @@ export async function POST(request) {
       parafPemberiIzin: body.parafPemberiIzin,
       namaPendamping: body.namaPendamping,
       parafPendamping: body.parafPendamping,
-    }
+    },
   });
 
+  return NextResponse.json({ res });
+}
+
+//delete logbook by id in params
+
+export async function DELETE(request) {
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get("id");
+
+  const res = await db.logbook.delete({
+    where: {
+      id: parseInt(id),
+    },
+  });
 
   return NextResponse.json({ res });
 }

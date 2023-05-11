@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react"
-import { useForm, Controller, set } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import Link from "next/link";
 import React from "react";
 import SignaturePad from "react-signature-canvas";
@@ -60,23 +60,15 @@ const Form = () => {
       const res = await axios.post('/api/logbook', {
         ...values
       })
-      console.log(res);
+      // console.log(res);
       setSuccess(true)
       setResult(res.data.res)
 
     } catch (error) {
       console.log(error);
     } finally {
-      console.log('done');
+      // console.log('done');
       setLoading(false);
-    }
-  };
-
-  //signature canvas
-  const formatIntoPng = () => {
-    if (sigCanvas.current) {
-      const dataURL = sigCanvas.current.toDataURL();
-      return dataURL;
     }
   };
 
@@ -104,6 +96,7 @@ const Form = () => {
   const SignatureBox = ({ name, label }) => {
     let sigCanvas = useRef({});
 
+
     const formatIntoPng = () => {
       if (sigCanvas.current) {
         const dataURL = sigCanvas.current.toDataURL();
@@ -111,6 +104,10 @@ const Form = () => {
       }
     };
 
+    const clear = (event) => {
+      event.preventDefault();
+      sigCanvas.current?.clear();
+    };
 
     return (
       <div className="form-control">
@@ -130,7 +127,9 @@ const Form = () => {
           )}
         />
         <p className="text-red-500 text-xs italic">{errors[name]?.message}</p>
-
+        <div>
+          <button className="btn btn-xs" onClick={clear}>Clear</button>
+        </div>
       </div>
 
     )
@@ -140,8 +139,9 @@ const Form = () => {
 
   if (success) {
     return (
-
-      <Success result={result} />
+      <>
+        <Success result={result} />
+      </>
     )
 
 

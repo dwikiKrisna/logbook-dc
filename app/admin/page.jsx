@@ -17,7 +17,7 @@ const Admin = () => {
   if (isLoading) return <div>loading...</div>;
 
   const handleDelete = async (id) => {
-    console.log(id);
+    // console.log(id);
     try {
       const res = await axios.delete(`/api/logbook?id=${id}`, {
         id: id,
@@ -155,14 +155,19 @@ const Admin = () => {
                     </td>
 
                     <td className="px-6 py-4 border border-slate-300">
-                      <button
-                        className="btn btn-xs btn-error"
-                        onClick={() => {
-                          handleDelete(logbook.id);
-                        }}
-                      >
-                        delete
-                      </button>
+                      <div className="dropdown  dropdown-end">
+                        <label tabIndex={0} className="btn btn-error btn-xs ">Delete</label>
+                        <div tabIndex={0} className="dropdown-content menu p-3 bg-slate-100 shadow  rounded-box w-52">
+                          <div>
+                            <p className="font-bold">Yakin untuk menghapus? </p>
+
+                            <button className="btn btn-sm mt-5 btn-primary" onClick={() => {
+                              handleDelete(logbook.id);
+                            }}>Ya, saya yakin</button>
+                          </div>
+                        </div>
+                      </div>
+
                     </td>
                   </tr>
                 );

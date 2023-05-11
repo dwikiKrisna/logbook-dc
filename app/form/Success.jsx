@@ -8,10 +8,10 @@ const Success = ({ result }) => {
         <div className='max-w-screen-xl mx-auto my-10'>
             <div className='flex justify-center  items-center gap-5 mb-5'>
                 <Image src='/Logo.png' width={50} height={50} alt='logo' />
-                <h1 className='text-xl  font-bold '>Logbook {result.janisServer}</h1>
+                <h1 className='text-2xl  font-bold '>Logbook {result.janisServer}</h1>
             </div>
             <div className='flex justify-center'>
-                <h1 className='text-2xl font-bold mb-10 text-green-600'>
+                <h1 className='text-2xl font-bold mb-10'>
                     Berhasil Mengisi Form Logbook Masuk ke Ruang Server
                 </h1>
             </div>
@@ -75,7 +75,7 @@ const Success = ({ result }) => {
                             {getDate(result.waktuMasuk)}
                         </td>
                         <td className="px-6 py-4 border border-slate-300 text-center">
-                            <div class="grid grid-cols-1 divide-y">
+                            <div className="grid grid-cols-1 divide-y">
                                 <div>{result.nama} </div>
                                 <div>{result.institusi}</div>
                                 <div>{result.noIdentitas}</div>
@@ -92,7 +92,7 @@ const Success = ({ result }) => {
                             {getTime(result.waktuKeluar)}
                         </td>
                         <td className="px-6 py-4 border border-slate-300 text-center">
-                            <div class="grid grid-cols-1 divide-y">
+                            <div className="grid grid-cols-1 divide-y">
                                 {result.namaPemberiIzin}
                                 <Image
                                     src={result.parafPemberiIzin}
@@ -105,7 +105,7 @@ const Success = ({ result }) => {
 
                         </td>
                         <td className="px-6 py-4 border border-slate-300 text-center">
-                            <div class="grid grid-cols-1 divide-y">
+                            <div className="grid grid-cols-1 divide-y">
                                 {result.namaPendamping}
                                 <Image
                                     src={result.parafPendamping}
@@ -119,10 +119,13 @@ const Success = ({ result }) => {
 
                 </tbody>
             </table>
-            <Link href='/form'>
-                <button className='btn btn-primary btn-outline mt-5 '>Kembali</button>
-            </Link>
-            <button className='btn btn-primary mt-5 ml-5' onClick={() => window.print()}>Cetak</button>
+
+            {/* button untuk isi ulang form dengan mereload halaman */}
+            <div className='flex justify-center mt-5'>
+                <Link href='/'>
+                    <button className='btn btn-primary'>Isi Ulang Form</button>
+                </Link>
+            </div>
 
         </div>
     )

@@ -1,14 +1,26 @@
 import { db } from "@/utils/db.server";
 import { getIsoFormatDateUTC } from "@/utils/timeFormat";
 import { NextResponse } from "next/server";
+import { parse } from "postcss";
 
-
+//pagination logbook with limit and page in query params
 export async function GET(request) {
+  const { searchParams } = new URL(request.url);
+  const page = searchParams.get("page");
+  const limit = searchParams.get("limit");
+
   const logbooks = await db.logbook.findMany({
+    // take: parseInt(limit),
+    // skip: parseInt(page) * parseInt(limit),
+    take: parseInt(limit),
+    skip: (parseInt(page) - 1) * parseInt(limit),
     orderBy: {
       id: "desc",
     },
   });
+
+
+
   return NextResponse.json(logbooks);
 }
 

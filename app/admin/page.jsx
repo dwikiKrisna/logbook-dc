@@ -9,7 +9,9 @@ import { getDate, getTime } from "../../utils/timeFormat";
 const fetcher = (url) => axios.get(url).then((res) => res.data);
 
 const Admin = () => {
-  const { data, error, isLoading } = useSWR(`/api/logbook`, fetcher);
+
+  const [page, setPage] = React.useState(1);
+  const { data, error, isLoading } = useSWR(`/api/logbook?page=${page}&limit=10`, fetcher);
 
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
@@ -26,6 +28,8 @@ const Admin = () => {
       console.log(error);
     }
   };
+
+
 
   return (
     <>
@@ -101,13 +105,13 @@ const Admin = () => {
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                   >
                     <td className="px-6 py-4 border border-slate-300">
-                      {index + 1}
+                      {logbook.id}
                     </td>
                     <td className="px-6 py-4 border border-slate-300">
                       {getDate(logbook.waktuMasuk)}
                     </td>
                     <td className="px-6 py-4 border border-slate-300 text-center">
-                      <div class="grid grid-cols-1 divide-y">
+                      <div className="grid grid-cols-1 divide-y">
                         <div>{logbook.nama} </div>
                         <div>{logbook.institusi}</div>
                         <div>{logbook.noIdentitas}</div>
@@ -124,7 +128,7 @@ const Admin = () => {
                       {getTime(logbook.waktuKeluar)}
                     </td>
                     <td className="px-6 py-4 border border-slate-300 text-center">
-                      <div class="grid grid-cols-1 divide-y">
+                      <div className="grid grid-cols-1 divide-y">
                         {logbook.namaPemberiIzin}
                         <Image
                           src={logbook.parafPemberiIzin}
@@ -135,7 +139,7 @@ const Admin = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4 border border-slate-300 text-center">
-                      <div class="grid grid-cols-1 divide-y">
+                      <div className="grid grid-cols-1 divide-y">
                         {logbook.namaPendamping}
                         <Image
                           src={logbook.parafPendamping}
@@ -165,6 +169,19 @@ const Admin = () => {
               })}
             </tbody>
           </table>
+
+          {/* pagination  */}
+          <div className="flex justify-center items-center my-5">
+            <div className="flex justify-center items-center gap-1">
+              <button onClick={() => {
+                setPage(page - 1)
+              }} className="btn btn-sm btn-primary " disabled={page == 1}>Prev</button>
+              <button className="btn btn-sm btn-primary btn-disabled text-black">Page : {page}</button>
+              <button onClick={() => {
+                setPage(page + 1)
+              }} className="btn btn-sm btn-primary">Next</button>
+            </div>
+          </div>
         </div>
       </div>
     </>

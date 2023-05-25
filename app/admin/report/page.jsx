@@ -59,7 +59,7 @@ const Report = () => {
 
   return (
     <>
-      <div className="container max-w-screen-2xl mx-auto my-5 p-5">
+      <div className="container max-w-screen-2xl mx-auto p-5">
         <h1 className="text-2xl font-bold mb-5">Create Report</h1>
         <div>
           <form onSubmit={handleSubmit(onSubmit)}>

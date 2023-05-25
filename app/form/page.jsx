@@ -1,15 +1,12 @@
 "use client";
 
-import { useRef, useState } from "react"
-import { useForm, Controller } from "react-hook-form";
-import Link from "next/link";
-import React from "react";
-import SignaturePad from "react-signature-canvas";
 import { yupResolver } from "@hookform/resolvers/yup";
+import axios from 'axios';
+import Link from "next/link";
+import { useRef, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import SignaturePad from "react-signature-canvas";
 import * as yup from "yup";
-import axios from 'axios'
-import { getDate, getTime } from "@/utils/timeFormat";
-import Image from "next/image";
 import Success from "./Success";
 
 //form validation schema  with yup

@@ -1,17 +1,22 @@
 import { db } from "@/utils/db.server";
 import { getIsoFormatDateUTC } from "@/utils/timeFormat";
 import { NextResponse } from "next/server";
-import { parse } from "postcss";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 //pagination logbook with limit and page in query params
 export async function GET(request) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return NextResponse.json({ message: 'You are not logged in.' })
+  }
+
+
   const { searchParams } = new URL(request.url);
   const page = searchParams.get("page");
   const limit = searchParams.get("limit");
 
   const logbooks = await db.logbook.findMany({
-    // take: parseInt(limit),
-    // skip: parseInt(page) * parseInt(limit),
     take: parseInt(limit),
     skip: (parseInt(page) - 1) * parseInt(limit),
     orderBy: {
@@ -19,10 +24,11 @@ export async function GET(request) {
     },
   });
 
-
-
   return NextResponse.json(logbooks);
 }
+
+
+
 
 export async function POST(request) {
   const body = await request.json();
@@ -49,6 +55,12 @@ export async function POST(request) {
 //delete logbook by id in params
 
 export async function DELETE(request) {
+
+  if (!session) {
+    return NextResponse.json({ message: 'You are not logged in.' })
+  }
+
+
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
 

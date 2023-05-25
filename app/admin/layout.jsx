@@ -1,9 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { LogoutButton } from "@/components/Buttons";
 
-export default function DashboardLayout({
-    children,
-}) {
+export default async function DashboardLayout({ children }) {
+    const session = await getServerSession(authOptions);
+    console.log("tes", session);
+    if (!session) {
+        return (
+            <div className="flex justify-center items-center min-h-screen">
+                <div className="text-center">
+                    <h1 className="text-lg mb-5">Anda belum memiliki akses, login terlebih dahulu!</h1>
+                    <Link className="btn btn-primary" href="/auth/login">Login</Link>
+                </div>
+            </div>
+        );
+    }
+
     return <>
         <div className="flex">
             <div className="max-w-sm px-5 min-h-screen shadow-xl">
@@ -23,12 +37,15 @@ export default function DashboardLayout({
 
                     <li>  <Link href="/admin/report">📄 Report </Link></li>
 
-                    <li><a>🔐 Log Out</a></li>
+                    <li>
+                        <LogoutButton />
+                    </li>
                 </ul>
             </div>
 
             <div className="bg-slate-100 flex-1">
                 {children}
+
             </div>
         </div>
 

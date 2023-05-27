@@ -4,15 +4,12 @@ import { db } from "@/utils/db.server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
-
 export async function GET(request) {
+  // session is null if user is not logged in
   const session = await getServerSession(authOptions);
-
   if (!session) {
-    return NextResponse.json({ message: 'You are not logged in.' })
+    return NextResponse.json({ message: "You are not logged in." });
   }
-
-
 
   const { searchParams } = new URL(request.url);
   const startdate = searchParams.get("startdate");

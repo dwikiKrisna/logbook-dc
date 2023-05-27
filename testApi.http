@@ -1,4 +1,15 @@
 GET http://localhost:3000/api/logbook?page=1&limit=1
 
 ###
-GET http://localhost:3000/api/logbook?page=1&limit=2
+GET http://localhost:3000/api/checkout
+
+
+###
+POST http://localhost:3000/api/checkout?id=8 HTTP/1.1
+Content-Type: application/json
+
+{
+    "keterangan": "checkout"
+}
+
+

@@ -13,8 +13,33 @@ const Admin = () => {
   const [page, setPage] = React.useState(1);
   const { data, error, isLoading } = useSWR(`/api/logbook?page=${page}&limit=10`, fetcher);
 
-  if (error) return <div>failed to load</div>;
-  if (isLoading) return <div>loading...</div>;
+  if (error) {
+    return (
+      <div className="container max-w-screen-2xl mx-auto p-5">
+        <h1 className="text-2xl font-bold mb-10">Admin Dashboard</h1>
+        <p className="text-md text-red-500">
+          failed to load data
+        </p>
+      </div>
+    )
+  }
+
+
+  if (isLoading) {
+    return (
+      <div className="container max-w-screen-2xl mx-auto p-5">
+        <h1 className="text-2xl font-bold mb-10">Admin Dashboard</h1>
+        <p className="text-md ">
+          loading...
+        </p>
+      </div>
+    )
+  }
+
+
+
+
+
 
   const handleDelete = async (id) => {
     // console.log(id);

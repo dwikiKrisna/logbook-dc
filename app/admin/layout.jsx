@@ -6,7 +6,7 @@ import { LogoutButton } from "@/components/Buttons";
 
 export default async function DashboardLayout({ children }) {
     const session = await getServerSession(authOptions);
-    console.log("tes", session);
+
     if (!session) {
         return (
             <div className="flex justify-center items-center min-h-screen">
@@ -31,12 +31,10 @@ export default async function DashboardLayout({ children }) {
                 <ul className="menu bg-base-100 w-56">
                     <li>
                         <Link href="/admin">
-                            🏠 Home
+                            🏠  Home
                         </Link>
                     </li>
-
-                    <li>  <Link href="/admin/report">📄 Report </Link></li>
-
+                    <li>  <Link href="/admin/report">📄  Report </Link></li>
                     <li>
                         <LogoutButton />
                     </li>

@@ -12,7 +12,7 @@ const Success = ({ result }) => {
             </div>
             <div className='flex justify-center'>
                 <h1 className='text-2xl font-bold mb-10'>
-                    Berhasil Mengisi Form Logbook Masuk ke Ruang Server
+                    Berhasil Mengisi Form <span className='bg-blue-800 text-white px-1 mx-1 rounded-md'> Check-In </span>  Ruang Server
                 </h1>
             </div>
 
@@ -47,7 +47,6 @@ const Success = ({ result }) => {
                             scope="col"
                             className="px-6 py-3 text-center border border-slate-300"
                         >
-                            Jam Keluar <br />
                             Jam Masuk
                         </th>
                         <th
@@ -88,8 +87,7 @@ const Success = ({ result }) => {
                         </td>
                         <td className="px-6 py-4 border border-slate-300 text-center">
                             {" "}
-                            {getTime(result.waktuMasuk)} s.d.{" "}
-                            {getTime(result.waktuKeluar)}
+                            {getTime(result.waktuMasuk)}
                         </td>
                         <td className="px-6 py-4 border border-slate-300 text-center">
                             <div className="grid grid-cols-1 divide-y">
@@ -121,9 +119,14 @@ const Success = ({ result }) => {
             </table>
 
             {/* button untuk isi ulang form dengan mereload halaman */}
-            <div className='flex justify-center mt-5'>
+            <div className='flex justify-center mt-5 gap-5'>
+
+                <button onClick={() => {
+                    window.location.reload()
+                }} className='btn '>Isi Lagi</button>
+
                 <Link href='/'>
-                    <button className='btn btn-primary'>Isi Ulang Form</button>
+                    <button className='btn btn-primary'>Isi Check-Out</button>
                 </Link>
             </div>
 

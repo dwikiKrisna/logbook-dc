@@ -18,7 +18,10 @@ export default function Home() {
           </h1>
 
           <Link href="/form">
-            <button className="btn btn-md ">Isi Logbook</button>
+            <button className="btn btn-md mr-5">Check-In</button>
+          </Link>
+          <Link href="/checkout">
+            <button className="btn btn-md btn-outline ">Check-Out</button>
           </Link>
         </div>
       </div>
@@ -39,7 +42,9 @@ export default function Home() {
         </div>
 
         <div>
-          <p className="text-xl font-bold text-white text-center">Pusat Teknologi Informasi </p>
+          <p className="text-xl font-bold text-white text-center">
+            Pusat Teknologi Informasi{" "}
+          </p>
           <p className="text-xl font-bold text-white text-center">PPATK</p>
         </div>
       </div>

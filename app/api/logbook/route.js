@@ -1,8 +1,7 @@
-import { db } from "@/utils/db.server";
-import { getIsoFormatDateUTC } from "@/utils/timeFormat";
-import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { db } from "@/utils/db.server";
+import { getServerSession } from "next-auth";
+import { NextResponse } from "next/server";
 
 //pagination logbook with limit and page in query params
 export async function GET(request) {
@@ -28,7 +27,6 @@ export async function GET(request) {
 
 export async function POST(request) {
   const body = await request.json();
-
   const res = await db.logbook.create({
     data: {
       janisServer: body.jenisServer,
@@ -36,8 +34,6 @@ export async function POST(request) {
       institusi: body.institusi,
       noIdentitas: body.nomorIdentitas,
       keperluan: body.keperluan,
-      waktuMasuk: getIsoFormatDateUTC(body.tanggal, body.waktuMasuk),
-      waktuKeluar: getIsoFormatDateUTC(body.tanggal, body.waktuKeluar),
       namaPemberiIzin: body.namaPemberiIzin,
       parafPemberiIzin: body.parafPemberiIzin,
       namaPendamping: body.namaPendamping,
@@ -47,8 +43,6 @@ export async function POST(request) {
 
   return NextResponse.json({ res });
 }
-
-//delete logbook by id in params
 
 export async function DELETE(request) {
   const session = await getServerSession(authOptions);

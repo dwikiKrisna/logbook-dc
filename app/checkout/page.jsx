@@ -30,19 +30,6 @@ const Checkout = () => {
     );
   }
 
-  const handleCheckout = async (id) => {
-    console.log(id);
-    try {
-      const res = await axios.post(`/api/checkout?id=${id}`, {
-        keterangan: "check-out",
-      });
-      console.log(res);
-      //   window.location.reload();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <>
       <div className="container max-w-screen-2xl mx-auto p-5">

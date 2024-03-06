@@ -60,15 +60,12 @@ const FormCheckout = ({ id }) => {
     <div>
       <form>
         <div className="form-control w-full max-w-md ">
-          <label className="label">
-            <span className="label-text">Keterangan</span>
-          </label>
           <textarea
             className="textarea textarea-bordered h-24 "
-            placeholder="Tulis keperluan anda masuk ke ruang server"
+            placeholder="Tulis keterangan anda keluar dari ruang server"
             {...register("keterangan")}
           />
-          <p className="text-red-500 text-xs italic">
+          <p className="mt-2 text-red-500 text-xs ">
             {errors.keterangan?.message}
           </p>
         </div>

@@ -16,9 +16,6 @@ const formSchema = yup.object().shape({
   institusi: yup.string().required("Institusi harus diisi"),
   nomorIdentitas: yup.string().required("Nomor identitas harus diisi"),
   keperluan: yup.string().required("Keperluan harus diisi"),
-  // tanggal: yup.string().required("Tanggal harus diisi"),
-  // waktuMasuk: yup.string().required("Waktu masuk harus diisi"),
-  // waktuKeluar: yup.string().required("Waktu keluar harus diisi"),
   namaPemberiIzin: yup.string().required("Nama pemberi izin harus diisi"),
   parafPemberiIzin: yup
     .string()
@@ -86,7 +83,7 @@ const Form = () => {
           placeholder={placeholder}
           className="input input-bordered w-full max-w-xs"
         />
-        <p className="text-red-500 text-xs italic">{errors[name]?.message}</p>
+        <p className="mt-2 text-red-500 text-xs ">{errors[name]?.message}</p>
       </div>
     );
   };
@@ -126,9 +123,9 @@ const Form = () => {
             />
           )}
         />
-        <p className="text-red-500 text-xs italic">{errors[name]?.message}</p>
+        <p className="text-red-500 text-xs ">{errors[name]?.message}</p>
         <div>
-          <button className="btn btn-xs mt-1" onClick={clear}>
+          <button className="btn btn-xs mt-2" onClick={clear}>
             Clear
           </button>
         </div>
@@ -155,7 +152,7 @@ const Form = () => {
       <div className="bg-slate-100 min-h-screen">
         <div className="container max-w-screen-md mx-auto p-5">
           <Link href="/">
-            <button className="btn btn-md mb-5 ">Kembali</button>
+            <button className="btn btn-md btn-ghost mb-5 "> 🏠 Kembali</button>
           </Link>
 
           <div className="bg-white p-5 rounded-xl shadow-md shadow-blue-100">
@@ -176,7 +173,7 @@ const Form = () => {
                     <option value="DC">DC / Data Center</option>
                     <option value="DRC">DRC / Data Recovery Center</option>
                   </select>
-                  <p className="text-red-500 text-xs italic">
+                  <p className="mt-2 text-red-500 text-xs ">
                     {errors.jenisServer?.message}
                   </p>
                 </div>
@@ -209,13 +206,11 @@ const Form = () => {
                     placeholder="Tulis keperluan anda masuk ke ruang server"
                     {...register("keperluan")}
                   />
-                  <p className="text-red-500 text-xs italic">
+                  <p className="mt-2 text-red-500 text-xs ">
                     {errors.keperluan?.message}
                   </p>
                 </div>
-                {/* <TextInput name='tanggal' label="Tanggal" type="date" placeholder="" />
-                <TextInput name='waktuMasuk' label="Waktu Masuk" type="time" placeholder="" /> */}
-                {/* <TextInput name='waktuKeluar' label="Waktu Keluar" type="time" placeholder="" /> */}
+
                 <TextInput
                   name="namaPemberiIzin"
                   label="Nama Pemberi Izin"

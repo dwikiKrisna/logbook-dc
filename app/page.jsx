@@ -6,7 +6,7 @@ export default function Home() {
     <main className="flex min-h-screen w-screen">
       <div className="flex flex-col flex-1 justify-center items-center">
         <div>
-          <h1 className=" text-3xl font-bold  mb-2 ">
+          <h1 className=" text-3xl font-bold mb-2 ">
             <mark className="px-2 text-white bg-blue-600 rounded dark:bg-blue-500">
               Catatan Akses Masuk
             </mark>

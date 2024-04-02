@@ -25,8 +25,23 @@ const Checkout = () => {
   if (isLoading) {
     return (
       <div className="container max-w-screen-2xl mx-auto p-5">
-        <h1 className="text-2xl font-bold mb-10">Check-Out</h1>
-        <p className="text-md ">loading...</p>
+        <Link href="/">
+          <button className="btn btn-md btn-ghost mb-5 "> 🏠 Kembali</button>
+        </Link>
+        <h1 className="text-2xl font-bold mb-10">Daftar Belum Check-Out</h1>
+        <p className="text-md ">Loading...</p>
+      </div>
+    );
+  }
+
+  if (data.length == 0) {
+    return (
+      <div className="container max-w-screen-2xl mx-auto p-5">
+        <Link href="/">
+          <button className="btn btn-md btn-ghost mb-5"> 🏠 Kembali</button>
+        </Link>
+        <h1 className="text-2xl font-bold mb-10">Daftar Belum Check-Out</h1>
+        <p className="text-md ">Data kosong, semua sudah checkout 👍</p>
       </div>
     );
   }

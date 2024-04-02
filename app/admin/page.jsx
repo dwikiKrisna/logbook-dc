@@ -104,6 +104,14 @@ const Admin = () => {
                 >
                   Jenis Ruang Server
                 </th>
+
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-center border border-slate-300"
+                >
+                  Keterangan
+                </th>
+
                 <th
                   scope="col"
                   className="px-6 py-3 text-center border border-slate-300"
@@ -125,7 +133,7 @@ const Admin = () => {
                     <td className="px-6 py-4 border border-slate-300">
                       {getDate(logbook.waktuMasuk)}
                     </td>
-                    <td className="px-6 py-4 border border-slate-300 text-center flex">
+                    <td className="px-6 py-4 border-slate-300 text-center flex">
                       <div className="grid grid-cols-1 divide-y">
                         <div>{logbook.nama} </div>
                         <div>{logbook.institusi}</div>
@@ -174,6 +182,12 @@ const Admin = () => {
 
                     <td className="px-6 py-4 border border-slate-300">
                       {logbook.janisServer}
+                    </td>
+
+                    <td className="px-6 py-4 border border-slate-300">
+                      <div>
+                        <p>{logbook.keterangan}</p>
+                      </div>
                     </td>
 
                     <td className="px-6 py-4 border border-slate-300">

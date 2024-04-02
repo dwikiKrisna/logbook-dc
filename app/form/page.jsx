@@ -13,6 +13,13 @@ import Success from "./Success";
 const formSchema = yup.object().shape({
   jenisServer: yup.string().required("Jenis server harus diisi"),
   nama: yup.string().required("Nama harus diisi"),
+  paraf: yup
+    .string()
+    .required("Paraf pemberi izin harus diisi")
+    .matches(
+      /^data:image\/(?:gif|png|jpeg|bmp|webp|svg\+xml)(?:;charset=utf-8)?;base64,(?:[A-Za-z0-9]|[+/])+={0,2}/,
+      "Signature must be png"
+    ),
   institusi: yup.string().required("Institusi harus diisi"),
   nomorIdentitas: yup.string().required("Nomor identitas harus diisi"),
   keperluan: yup.string().required("Keperluan harus diisi"),
@@ -52,6 +59,7 @@ const Form = () => {
 
   // api call to backend with axios
   const onSubmit = async (values) => {
+    console.log(values);
     console.log("oke");
     try {
       setLoading(true);
@@ -118,7 +126,7 @@ const Form = () => {
               onEnd={() => field.onChange(formatIntoPng())}
               penColor="black"
               canvasProps={{
-                className: "w-full h-32 border rounded-lg bg-white",
+                className: "max-w-xs border rounded-lg bg-white",
               }}
             />
           )}
@@ -160,7 +168,7 @@ const Form = () => {
               Form Logbook Masuk ke Ruang Server
             </h1>
             <form>
-              <div className="flex flex-wrap gap-5">
+              <div className="gap-2 flex-col flex">
                 <div className="form-control w-full max-w-xs">
                   <label className="label">
                     <span className="label-text">Jenis Ruang Server</span>
@@ -180,9 +188,14 @@ const Form = () => {
 
                 <TextInput
                   name="nama"
-                  label="Nama"
+                  label="Nama Pengunjung"
                   type="text"
                   placeholder="Nama"
+                />
+                <SignatureBox
+                  name="paraf"
+                  label="Paraf Pengunjung"
+                  control={control}
                 />
                 <TextInput
                   name="institusi"
@@ -197,7 +210,7 @@ const Form = () => {
                   placeholder=""
                 />
 
-                <div className="form-control w-full max-w-md ">
+                <div className="form-control w-full  ">
                   <label className="label">
                     <span className="label-text">Keperluan</span>
                   </label>

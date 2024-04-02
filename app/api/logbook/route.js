@@ -31,6 +31,7 @@ export async function POST(request) {
     data: {
       janisServer: body.jenisServer,
       nama: body.nama,
+      paraf: body.paraf,
       institusi: body.institusi,
       noIdentitas: body.nomorIdentitas,
       keperluan: body.keperluan,

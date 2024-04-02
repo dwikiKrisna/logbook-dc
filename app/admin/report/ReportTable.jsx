@@ -31,8 +31,14 @@ const ReportTable = React.forwardRef(({ formValue }, ref) => {
         )
       </h1>
       <p className="text-center  mb-5 text-slate-700">
-        {formValue.tanggalStart === formValue.tanggalEnd ? <> Tanggal {formValue.tanggalStart}  </> : <> Tanggal {formValue.tanggalStart} s.d. {formValue.tanggalEnd}</>}
-
+        {formValue.tanggalStart === formValue.tanggalEnd ? (
+          <> Tanggal {formValue.tanggalStart} </>
+        ) : (
+          <>
+            {" "}
+            Tanggal {formValue.tanggalStart} s.d. {formValue.tanggalEnd}
+          </>
+        )}
       </p>
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-blue-50 dark:bg-gray-700 dark:text-gray-400">
@@ -95,13 +101,21 @@ const ReportTable = React.forwardRef(({ formValue }, ref) => {
                 <td className="px-6 py-4 border border-slate-300">
                   {getDate(logbook.waktuMasuk)}
                 </td>
-                <td className="px-6 py-4 border border-slate-300 text-center">
+
+                <td className="px-6 py-4 border border-slate-300 text-center flex">
                   <div className="grid grid-cols-1 divide-y">
                     <div>{logbook.nama} </div>
                     <div>{logbook.institusi}</div>
                     <div>{logbook.noIdentitas}</div>
                   </div>
+                  <Image
+                    src={logbook.paraf}
+                    width={100}
+                    height={100}
+                    alt="paraf "
+                  />
                 </td>
+
                 <td className="px-6 py-4 border border-slate-300">
                   <div>
                     <p>{logbook.keperluan}</p>

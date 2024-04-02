@@ -6,6 +6,7 @@ import useSWR from "swr";
 import axios from "axios";
 import { getDate, getTime } from "@/utils/timeFormat";
 import FormCheckout from "./FormCheckout";
+import Link from "next/link";
 
 const fetcher = (url) => axios.get(url).then((res) => res.data);
 
@@ -33,6 +34,9 @@ const Checkout = () => {
   return (
     <>
       <div className="container max-w-screen-2xl mx-auto p-5">
+        <Link href="/">
+          <button className="btn btn-md btn-ghost mb-5 "> 🏠 Kembali</button>
+        </Link>
         <h1 className="text-2xl font-bold mb-10">Daftar Belum Check-Out</h1>
 
         <div className="">

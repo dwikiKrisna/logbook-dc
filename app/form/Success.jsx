@@ -24,10 +24,7 @@ const Success = ({ result }) => {
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <tbody className="text-black">
           <tr className="border-b dark:bg-gray-800 dark:border-gray-700">
-            <td className="bg-blue-100  px-6 py-4 border border-slate-300">
-              {1}
-            </td>
-            <td className=" bg-blue-100 px-6 py-4 border border-slate-300">
+            <td className=" bg-blue-100 px-6 py-4 border border-slate-300  font-bold">
               Tanggal
             </td>
             <td className="px-6 py-4 border border-slate-300">
@@ -36,10 +33,7 @@ const Success = ({ result }) => {
           </tr>
 
           <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-            <td className=" bg-blue-100 px-6 py-4 border border-slate-300">
-              {2}
-            </td>
-            <td className=" bg-blue-100 px-6 py-4 border border-slate-300">
+            <td className=" bg-blue-100 px-6 py-4 border border-slate-300  font-bold">
               {" "}
               Nama <br /> Institusi <br /> No.KTP/SIM/ID
             </td>
@@ -48,15 +42,21 @@ const Success = ({ result }) => {
                 <div>{result.nama} </div>
                 <div>{result.institusi}</div>
                 <div>{result.noIdentitas}</div>
+                <div className="grid grid-cols-1 divide-y">
+                  {result.namaPendamping}
+                  <Image
+                    src={result.paraf}
+                    width={100}
+                    height={100}
+                    alt="paraf"
+                  />
+                </div>
               </div>
             </td>
           </tr>
 
           <tr className="border-b dark:bg-gray-800 dark:border-gray-700">
-            <td className=" bg-blue-100 px-6 py-4 border border-slate-300">
-              {3}
-            </td>
-            <td className=" bg-blue-100 px-6 py-4 border border-slate-300">
+            <td className=" bg-blue-100 px-6 py-4 border border-slate-300  font-bold">
               Keperluan
             </td>
             <td className="px-6 py-4 border border-slate-300">
@@ -65,10 +65,7 @@ const Success = ({ result }) => {
           </tr>
 
           <tr className="border-b dark:bg-gray-800 dark:border-gray-700">
-            <td className=" bg-blue-100 px-6 py-4 border border-slate-300">
-              {4}
-            </td>
-            <td className=" bg-blue-100 px-6 py-4 border border-slate-300">
+            <td className=" bg-blue-100 px-6 py-4 border border-slate-300  font-bold">
               Jam masuk
             </td>
             <td className="px-6 py-4 border border-slate-300">
@@ -76,10 +73,7 @@ const Success = ({ result }) => {
             </td>
           </tr>
           <tr className="border-b dark:bg-gray-800 dark:border-gray-700">
-            <td className=" bg-blue-100 px-6 py-4 border border-slate-300">
-              {5}
-            </td>
-            <td className=" bg-blue-100 px-6 py-4 border border-slate-300">
+            <td className=" bg-blue-100 px-6 py-4 border border-slate-300  font-bold">
               Pemberi Izin
             </td>
             <td className="px-6 py-4 border border-slate-300">
@@ -96,10 +90,7 @@ const Success = ({ result }) => {
           </tr>
 
           <tr className="border-b dark:bg-gray-800 dark:border-gray-700">
-            <td className=" bg-blue-100 px-6 py-4 border border-slate-300">
-              {6}
-            </td>
-            <td className=" bg-blue-100 px-6 py-4 border border-slate-300">
+            <td className=" bg-blue-100 px-6 py-4 border border-slate-300  font-bold">
               Pemberi Izin
             </td>
             <td className="px-6 py-4 border border-slate-300">

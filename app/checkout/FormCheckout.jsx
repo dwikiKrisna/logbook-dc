@@ -4,12 +4,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
 import { Controller, useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 const formSchema = yup.object().shape({
   keterangan: yup.string().required("Keterangan harus diisi"),
 });
 
 const FormCheckout = ({ id }) => {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [result, setResult] = useState({});
@@ -38,19 +40,16 @@ const FormCheckout = ({ id }) => {
       console.log(error);
     } finally {
       setLoading(false);
+      window.location.reload();
     }
   };
 
   if (success) {
     return (
       <>
-        <div className="alert alert-success">
-          <div className="flex-1">
-            <label className="label">
-              <span className="label-text">Keterangan</span>
-            </label>
-            <p className="text-2xl font-bold">{result.keterangan}</p>
-          </div>
+        <div className="">
+          <p className="font-bold">Keterangan:</p>
+          <p className="">{result.keterangan}</p>
         </div>
       </>
     );

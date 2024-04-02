@@ -6,27 +6,25 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
 model Logbook {
-  id         Int        @id @default(autoincrement())
-  janisServer String @db.VarChar(255)
-  nama      String    @db.VarChar(255)
-  institusi String    @db.VarChar(255)
-  noIdentitas String @db.VarChar(255)
-  keperluan String @db.VarChar(1000)
-  waktuMasuk DateTime @default(now())
-  waktuKeluar DateTime @default(now())
-  namaPemberiIzin String @db.VarChar(255)
-  parafPemberiIzin String @db.Text
-  namaPendamping String @db.VarChar(255)
-  parafPendamping String @db.Text
-  status String @db.VarChar(255) @default("masuk")
-  keterangan String @db.VarChar(1000) @default("")
+  id               Int      @id @default(autoincrement())
+  janisServer      String   @db.VarChar(255)
+  nama             String   @db.VarChar(255)
+  paraf            String   @db.Text
+  institusi        String   @db.VarChar(255)
+  noIdentitas      String   @db.VarChar(255)
+  keperluan        String   @db.VarChar(1000)
+  waktuMasuk       DateTime @default(now())
+  waktuKeluar      DateTime @default(now())
+  namaPemberiIzin  String   @db.VarChar(255)
+  parafPemberiIzin String   @db.Text
+  namaPendamping   String   @db.VarChar(255)
+  parafPendamping  String   @db.Text
+  status           String   @default("masuk") @db.VarChar(255)
+  keterangan       String   @default("") @db.VarChar(1000)
 }
-
-
-

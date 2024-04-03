@@ -133,20 +133,22 @@ const Admin = () => {
                     <td className="px-5 py-4 border border-slate-300">
                       {getDate(logbook.waktuMasuk)}
                     </td>
-                    <td className="px-5 py-4 border-slate-300 text-center flex">
-                      <div className="grid grid-cols-1 divide-y w-64">
-                        <div>{logbook.nama} </div>
-                        <div>{logbook.institusi}</div>
-                        <div>{logbook.noIdentitas}</div>
-                      </div>
+                    <td className="px-5 py-4 border-slate-300 text-center ">
+                      <div className="flex">
+                        <div className="grid grid-cols-1 divide-y w-64">
+                          <div>{logbook.nama} </div>
+                          <div>{logbook.institusi}</div>
+                          <div>{logbook.noIdentitas}</div>
+                        </div>
 
-                      <Image
-                        src={logbook.paraf}
-                        width={100}
-                        height={100}
-                        alt="paraf pemberi izin"
-                        className=""
-                      />
+                        <Image
+                          src={logbook.paraf}
+                          width={100}
+                          height={100}
+                          alt="paraf pemberi izin"
+                          className=""
+                        />
+                      </div>
                     </td>
                     <td className="px-5 py-4 border border-slate-300">
                       <div>

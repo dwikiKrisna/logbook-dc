@@ -102,18 +102,20 @@ const ReportTable = React.forwardRef(({ formValue }, ref) => {
                   {getDate(logbook.waktuMasuk)}
                 </td>
 
-                <td className="px-6 py-4 border-slate-300 text-center flex ">
-                  <div className="grid grid-cols-1 divide-y w-64">
-                    <div>{logbook.nama} </div>
-                    <div>{logbook.institusi}</div>
-                    <div>{logbook.noIdentitas}</div>
+                <td className="px-6 py-4 border-slate-300 text-center">
+                  <div className="flex">
+                    <div className="grid grid-cols-1 divide-y w-64">
+                      <div>{logbook.nama} </div>
+                      <div>{logbook.institusi}</div>
+                      <div>{logbook.noIdentitas}</div>
+                    </div>
+                    <Image
+                      src={logbook.paraf}
+                      width={100}
+                      height={100}
+                      alt="paraf "
+                    />
                   </div>
-                  <Image
-                    src={logbook.paraf}
-                    width={100}
-                    height={100}
-                    alt="paraf "
-                  />
                 </td>
 
                 <td className="px-6 py-4 border border-slate-300">

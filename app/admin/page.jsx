@@ -57,64 +57,64 @@ const Admin = () => {
               <tr>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-center border border-slate-300 "
+                  className="px-5 py-3 text-center border border-slate-300 "
                 >
                   No
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-center border border-slate-300"
+                  className="px-5 py-3 text-center border border-slate-300"
                 >
                   Tanggal
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-center border border-slate-300"
+                  className="px-5 py-3 text-center border border-slate-300"
                 >
                   Nama <br /> Institusi <br /> No.KTP/SIM/ID
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-center border border-slate-300"
+                  className="px-5 py-3 text-center border border-slate-300"
                 >
                   Keperluan
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-center border border-slate-300"
+                  className="px-5 py-3 text-center border border-slate-300"
                 >
                   Jam Keluar <br />
                   Jam Masuk
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-center border border-slate-300"
+                  className="px-5 py-3 text-center border border-slate-300"
                 >
                   Pemberi Izin
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-center border border-slate-300"
+                  className="px-5 py-3 text-center border border-slate-300"
                 >
                   Pendamping
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-center border border-slate-300"
+                  className="px-5 py-3 text-center border border-slate-300"
                 >
                   Jenis Ruang Server
                 </th>
 
                 <th
                   scope="col"
-                  className="px-6 py-3 text-center border border-slate-300"
+                  className="px-5 py-3 text-center border border-slate-300"
                 >
                   Keterangan
                 </th>
 
                 <th
                   scope="col"
-                  className="px-6 py-3 text-center border border-slate-300"
+                  className="px-5 py-3 text-center border border-slate-300"
                 >
                   Aksi
                 </th>
@@ -127,14 +127,14 @@ const Admin = () => {
                     key={index}
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                   >
-                    <td className="px-6 py-4 border border-slate-300">
+                    <td className="px-5 py-4 border border-slate-300">
                       {logbook.id}
                     </td>
-                    <td className="px-6 py-4 border border-slate-300">
+                    <td className="px-5 py-4 border border-slate-300">
                       {getDate(logbook.waktuMasuk)}
                     </td>
-                    <td className="px-6 py-4 border-slate-300 text-center flex">
-                      <div className="grid grid-cols-1 divide-y">
+                    <td className="px-5 py-4 border-slate-300 text-center flex">
+                      <div className="grid grid-cols-1 divide-y w-64">
                         <div>{logbook.nama} </div>
                         <div>{logbook.institusi}</div>
                         <div>{logbook.noIdentitas}</div>
@@ -145,19 +145,20 @@ const Admin = () => {
                         width={100}
                         height={100}
                         alt="paraf pemberi izin"
+                        className=""
                       />
                     </td>
-                    <td className="px-6 py-4 border border-slate-300">
+                    <td className="px-5 py-4 border border-slate-300">
                       <div>
                         <p>{logbook.keperluan}</p>
                       </div>
                     </td>
-                    <td className="px-6 py-4 border border-slate-300 text-center ">
+                    <td className="px-5 py-4 border border-slate-300 text-center ">
                       {" "}
                       {getTime(logbook.waktuMasuk)} s.d.{" "}
                       {getTime(logbook.waktuKeluar)}
                     </td>
-                    <td className="px-6 py-4 border border-slate-300 text-center">
+                    <td className="px-5 py-4 border border-slate-300 text-center">
                       <div className="grid grid-cols-1 divide-y">
                         {logbook.namaPemberiIzin}
                         <Image
@@ -168,7 +169,7 @@ const Admin = () => {
                         />
                       </div>
                     </td>
-                    <td className="px-6 py-4 border border-slate-300 text-center">
+                    <td className="px-5 py-4 border border-slate-300 text-center">
                       <div className="grid grid-cols-1 divide-y">
                         {logbook.namaPendamping}
                         <Image
@@ -180,17 +181,17 @@ const Admin = () => {
                       </div>
                     </td>
 
-                    <td className="px-6 py-4 border border-slate-300">
+                    <td className="px-5 py-4 border border-slate-300">
                       {logbook.janisServer}
                     </td>
 
-                    <td className="px-6 py-4 border border-slate-300">
+                    <td className="px-5 py-4 border border-slate-300">
                       <div>
                         <p>{logbook.keterangan}</p>
                       </div>
                     </td>
 
-                    <td className="px-6 py-4 border border-slate-300">
+                    <td className="px-5 py-4 border border-slate-300">
                       <div className="dropdown  dropdown-end">
                         <label tabIndex={0} className="btn btn-error btn-xs ">
                           Delete

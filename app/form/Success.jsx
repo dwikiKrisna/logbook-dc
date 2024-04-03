@@ -43,7 +43,6 @@ const Success = ({ result }) => {
                 <div>{result.institusi}</div>
                 <div>{result.noIdentitas}</div>
                 <div className="grid grid-cols-1 divide-y">
-                  {result.namaPendamping}
                   <Image
                     src={result.paraf}
                     width={100}

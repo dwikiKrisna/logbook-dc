@@ -101,10 +101,7 @@ const Checkout = () => {
             <tbody className="text-black">
               {data.map((logbook, index) => {
                 return (
-                  <tr
-                    key={index}
-                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                  >
+                  <tr key={index} className="bg-white border-b">
                     <td className="px-6 py-4 border border-slate-300 text-center">
                       <div className="grid grid-cols-1 divide-y">
                         <div>{logbook.nama} </div>

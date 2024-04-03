@@ -123,10 +123,7 @@ const Admin = () => {
             <tbody className="text-black">
               {data.map((logbook, index) => {
                 return (
-                  <tr
-                    key={index}
-                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                  >
+                  <tr key={index} className="bg-white border-b ">
                     <td className="px-5 py-4 border border-slate-300">
                       {logbook.id}
                     </td>

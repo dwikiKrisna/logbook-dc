@@ -14,16 +14,15 @@ const Success = ({ result }) => {
         <h1 className="text-2xl font-bold mb-10">
           Berhasil Mengisi Form{" "}
           <span className="bg-blue-800 text-white px-1 mx-1 rounded-md">
-            {" "}
-            Check-In{" "}
-          </span>{" "}
+            Check-In
+          </span>
           Ruang Server
         </h1>
       </div>
 
-      <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <table className="w-full text-sm text-left text-gray-500 ">
         <tbody className="text-black">
-          <tr className="border-b dark:bg-gray-800 dark:border-gray-700">
+          <tr className="border-b ">
             <td className=" bg-blue-100 px-6 py-4 border border-slate-300  font-bold">
               Tanggal
             </td>
@@ -32,7 +31,7 @@ const Success = ({ result }) => {
             </td>
           </tr>
 
-          <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <tr className="bg-white border-b">
             <td className=" bg-blue-100 px-6 py-4 border border-slate-300  font-bold">
               {" "}
               Nama <br /> Institusi <br /> No.KTP/SIM/ID
@@ -54,7 +53,7 @@ const Success = ({ result }) => {
             </td>
           </tr>
 
-          <tr className="border-b dark:bg-gray-800 dark:border-gray-700">
+          <tr className="border-b">
             <td className=" bg-blue-100 px-6 py-4 border border-slate-300  font-bold">
               Keperluan
             </td>
@@ -63,7 +62,7 @@ const Success = ({ result }) => {
             </td>
           </tr>
 
-          <tr className="border-b dark:bg-gray-800 dark:border-gray-700">
+          <tr className="border-b">
             <td className=" bg-blue-100 px-6 py-4 border border-slate-300  font-bold">
               Jam masuk
             </td>
@@ -71,7 +70,7 @@ const Success = ({ result }) => {
               {getTime(result.waktuMasuk)}
             </td>
           </tr>
-          <tr className="border-b dark:bg-gray-800 dark:border-gray-700">
+          <tr className="border-b ">
             <td className=" bg-blue-100 px-6 py-4 border border-slate-300  font-bold">
               Pemberi Izin
             </td>
@@ -88,7 +87,7 @@ const Success = ({ result }) => {
             </td>
           </tr>
 
-          <tr className="border-b dark:bg-gray-800 dark:border-gray-700">
+          <tr className="border-b ">
             <td className=" bg-blue-100 px-6 py-4 border border-slate-300  font-bold">
               Pemberi Izin
             </td>
